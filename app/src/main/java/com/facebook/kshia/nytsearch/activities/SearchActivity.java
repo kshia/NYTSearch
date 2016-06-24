@@ -5,14 +5,9 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.drawable.GradientDrawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -21,17 +16,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.Toast;
 
 import com.facebook.kshia.nytsearch.Article;
-import com.facebook.kshia.nytsearch.ArticleArrayAdapter;
-import com.facebook.kshia.nytsearch.DatePickerFragment;
 import com.facebook.kshia.nytsearch.EndlessRecyclerViewScrollListener;
-import com.facebook.kshia.nytsearch.FilterActivity;
 import com.facebook.kshia.nytsearch.FilterFragment;
 import com.facebook.kshia.nytsearch.FilterSettings;
 import com.facebook.kshia.nytsearch.R;
@@ -50,10 +38,7 @@ import cz.msebera.android.httpclient.Header;
 
 public class SearchActivity extends AppCompatActivity implements FilterFragment.FilterFragmentListener{
 
-    //GridView gvResults;
-    //EditText etQuery;
     String searchQuery;
-    Button btnSearch;
     RecyclerView rvArticles;
 
     ArrayList<Article> articles;
@@ -66,10 +51,6 @@ public class SearchActivity extends AppCompatActivity implements FilterFragment.
     final int TOP_STORY = 0;
     final int NORMAL = 1;
 
-//    public String beginDateAPI;
-//    public String sortAPI;
-//    public String news_deskAPI;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,25 +59,11 @@ public class SearchActivity extends AppCompatActivity implements FilterFragment.
         setSupportActionBar(toolbar);
         setupViews();
         filterSettings = new FilterSettings();
-//        beginDateAPI = "";
-//        sortAPI = "";
-//        news_deskAPI = "";
     }
 
     public void setupViews() {
 
-        // Lookup views
-        //etQuery = (EditText) findViewById(R.id.etQuery);
-        //btnSearch = (Button) findViewById(R.id.btnSearch);
         rvArticles = (RecyclerView) findViewById(R.id.rvArticles);
-
-        //gvResults = (GridView) findViewById(R.id.gvResults);
-        //adapter = new ArticleArrayAdapter(this, articles);
-        //gvResults.setAdapter(adapter);
-
-
-        // Lookup the recyclerview in activity layout
-
 
         // Create adapter passing in the sample user data
         // Attach the adapter to the recyclerview to populate items
@@ -112,18 +79,6 @@ public class SearchActivity extends AppCompatActivity implements FilterFragment.
         layoutManager = new StaggeredGridLayoutManager(numColumns, StaggeredGridLayoutManager.VERTICAL);
         layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
         rvArticles.setLayoutManager(layoutManager);
-
-//        // Add ScrollListener for infinite scroll
-//        rvArticles.addOnScrollListener(new EndlessRecyclerViewScrollListener(layoutManager) {
-//            @Override
-//            public void onLoadMore(int page, int totalItemsCount) {
-//                // Triggered only when new data needs to be appended to the list
-//                // Add whatever code is needed to append new items to the bottom of the list
-//
-//
-//                customLoadMoreDataFromApi(page);
-//            }
-//        });
 
         // Add OnClickListener for article view
         ItemClickSupport.addTo(rvArticles).setOnItemClickListener(
@@ -141,21 +96,6 @@ public class SearchActivity extends AppCompatActivity implements FilterFragment.
         );
 
         loadTopStories();
-//        gvResults.setOnScrollListener(new EndlessScrollListener() {
-//            @Override
-//            public boolean onLoadMore(int page, int totalItemsCount) {
-//                // Triggered only when new data needs to be appended to the list
-//                // Add whatever code is needed to append new items to your AdapterView
-//                customLoadMoreDataFromApi(page);
-//                // or customLoadMoreDataFromApi(totalItemsCount);
-//                return true; // ONLY if more data is actually being loaded; false otherwise.
-//            }
-//
-//            public int getFooterViewType() {
-//                return -1;
-//            }
-//
-//        });
     }
 
     // Append more data into the adapter
@@ -173,22 +113,6 @@ public class SearchActivity extends AppCompatActivity implements FilterFragment.
         applyFilters(params);
 
         makeCall(params);
-//        if (!sortAPI.equals("")) {
-//            Log.d("DEBUG", sortAPI);
-//            params.put("sort", sortAPI);
-//        }
-//        if (!beginDateAPI.equals("")) {
-//            Log.d("DEBUG", beginDateAPI);
-//            params.put("begin_date", beginDateAPI);
-//        }
-//        if (!news_deskAPI.equals("")) {
-//            Log.d("DEBUG", news_deskAPI);
-//            params.put("news_desk", news_deskAPI);
-//        }
-
-        //q=trump&api-key=1d306c0b070d482ca19cf71f537479ca&begin_date=20160622_021238&page=0
-
-
 
         // For efficiency purposes, notify the adapter of only the elements that got changed
         // curSize will equal to the index of the first element inserted because the list is 0-indexed
@@ -238,81 +162,18 @@ public class SearchActivity extends AppCompatActivity implements FilterFragment.
             }
         };
 
-
-//        //Toast.makeText(this, "Searching for: " + query, Toast.LENGTH_LONG).show();
-//        AsyncHttpClient client = new AsyncHttpClient();
-//        String url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
-        //String query = etQuery.getText().toString();
         RequestParams params = new RequestParams();
         params.put("api-key", "1d306c0b070d482ca19cf71f537479ca");
         params.put("page", 0);
         params.put("q", searchQuery);
 
         applyFilters(params);
-//        if (!sortAPI.equals("")) {
-//            Log.d("DEBUG", sortAPI);
-//            params.put("sort", sortAPI);
-//        }
-//        if (!beginDateAPI.equals("")) {
-//            Log.d("DEBUG", beginDateAPI);
-//            params.put("begin_date", beginDateAPI);
-//        }
-//        if (!news_deskAPI.equals("")) {
-//            Log.d("DEBUG", news_deskAPI);
-//            params.put("news_desk", news_deskAPI);
-//        }
 
-//        client.get(url, params, new JsonHttpResponseHandler() {
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-//                Log.d("DEBUG", response.toString());
-//                JSONArray articleJsonResults = null;
-//
-//                try {
-//                    articleJsonResults = response.getJSONObject("response").getJSONArray("docs");
-//                    Log.d("DEBUG", articleJsonResults.toString());
-//
-//                    rvArticles.clearOnScrollListeners();
-//                    rvArticles.addOnScrollListener(new EndlessRecyclerViewScrollListener(layoutManager) {
-//                        @Override
-//                        public void onLoadMore(int page, int totalItemsCount) {
-//                            // Triggered only when new data needs to be appended to the list
-//                            // Add whatever code is needed to append new items to the bottom of the list
-//                            customLoadMoreDataFromApi(page);
-//                        }
-//                    });
-//
-//                    Log.d("DEBUG", "API call made");
-//
-//                    // changes arraylist and notifies adapter
-//                    articles.clear();
-//                    articles.addAll(Article.fromJSONArray(articleJsonResults));
-//                    adapter.notifyDataSetChanged();
-//                    Log.d("DEBUG", articles.toString());
-//
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-//                Log.d("API", "broken");
-//                super.onFailure(statusCode, headers, throwable, errorResponse);
-//            }
-//        });
         makeCall(params);
     }
 
-//    public void onSave(View view) {
-//        Toast.makeText(this, "YAY", Toast.LENGTH_SHORT).show();
-//        newFragment.dismiss();
-//    }
 
     public void openFilter() {
-//        Intent i = new Intent(this, FilterActivity.class);
-//        startActivity(i);
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         Fragment prev = getFragmentManager().findFragmentByTag("dialog");
         if (prev != null) {
@@ -327,12 +188,6 @@ public class SearchActivity extends AppCompatActivity implements FilterFragment.
     @Override
     public void onFilterFinished() {
 
-//        beginDateAPI = beginDate;       //already formatted
-//        sortAPI = sort.toLowerCase();
-//        news_deskAPI = news_desk;
-//        if (news_desk.equals("All")) {
-//            news_deskAPI = "";
-//        }L
         if (searchQuery == null || searchQuery.equals("")) {
             Toast.makeText(this, "Enter a query before filtering", Toast.LENGTH_SHORT).show();
             loadTopStories();
@@ -422,20 +277,13 @@ public class SearchActivity extends AppCompatActivity implements FilterFragment.
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                // perform query here
-                //Toast.makeText(SearchActivity.this, "Searched: " + query, Toast.LENGTH_SHORT).show();
+
                 searchQuery = query;
                 getSupportActionBar().setTitle(query);
-                //Log.d("TOPSTORIES", searchQuery);
-                // workaround to avoid issues with some emulators and keyboard devices firing twice if a keyboard enter is used
-                // see https://code.google.com/p/android/issues/detail?id=24599
-                searchView.clearFocus();
-//                if (searchQuery == null || searchQuery.equals("")) {
-//                    loadTopStories();
-//                }
-//                else {
-                onArticleSearch();
 
+                searchView.clearFocus();
+
+                onArticleSearch();
 
                 return true;
             }
@@ -459,15 +307,7 @@ public class SearchActivity extends AppCompatActivity implements FilterFragment.
             openFilter();
         }
 
-        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-
         return super.onOptionsItemSelected(item);
     }
 
-//    public void onFragmentInteraction(Uri uri) {
-//        Toast.makeText(this, "YAY", Toast.LENGTH_SHORT);
-//    }
 }

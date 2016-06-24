@@ -16,7 +16,7 @@ The following **optional** features are implemented:
 
 * [X] Used the **ActionBar SearchView** or custom layout as the query box
 * [X] User can **share an article link** to their friends or email it to themselves
-* [ ] Improved the user interface and experiment with image assets and/or styling and coloring
+* [X] Improved the user interface and experiment with image assets and/or styling and coloring
 * [X] User can click on "settings" which allows selection of **advanced search options** to filter results
   * [X] User can configure advanced search filters such as:
     * [X] Begin Date (using a date picker)
@@ -30,13 +30,15 @@ The following **optional** features are implemented:
 * [ ] Use Parcelable instead of Serializable leveraging the popular [Parceler library](http://guides.codepath.com/android/Using-Parceler).
 * [ ] Replace Picasso with [Glide](http://inthecheesefactory.com/blog/get-to-know-glide-recommended-by-google/en) for more efficient image rendering.
 * [X] Before an article search is triggered by the user, displays the current top stories of the day by default.
-* [ ] Hides the `Toolbar` at the top as the user scrolls down through the results using the [CoordinatorLayout and AppBarLayout](http://guides.codepath.com/android/Using-the-App-ToolBar#reacting-to-scroll).
+* [X] Hides the `Toolbar` at the top as the user scrolls down through the results using the [CoordinatorLayout and AppBarLayout](http://guides.codepath.com/android/Using-the-App-ToolBar#reacting-to-scroll).
 * [ ] Leverage the popular [GSON library](http://guides.codepath.com/android/Using-Android-Async-Http-Client#decoding-with-gson-library) to streamline the parsing of JSON data and avoid manual parsing.
 
 The following **additional** features are implemented:
 
 * Toolbar title changes to reflect most recent query
 * Change number of columns depending on orientation
+* Changed launcher icon
+* Date picker initializes to previously set date
 
 ## Video Walkthrough
 
@@ -48,7 +50,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-It was difficult to diagnose issues with API Rate Limit errors when using the Article Search API. Working between fragments was also a bit of a challenge with the listener implementation. I could not figure out how to use 2 separate date pickers in a single fragment with another fragment as the listener since the listener could not differentiate between the two date pickers.
+Since I used a Dialog Fragment instead of a new activity for my filters, I did not have a reason to implement Serializable or Parcelable. It was difficult to diagnose issues with API Rate Limit errors when using the Article Search API. Working between fragments was also a bit of a challenge with the listener implementation. I could not figure out how to use 2 separate date pickers in a single fragment with another fragment as the listener since the listener could not differentiate between the two date pickers.
 
 ## Open-source libraries used
 
@@ -57,7 +59,7 @@ It was difficult to diagnose issues with API Rate Limit errors when using the Ar
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [2016] [Kristina Shia]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

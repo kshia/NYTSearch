@@ -63,28 +63,6 @@
 
     </RelativeLayout>
 
-    <!--<LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/begindatelayout"
-        android:id="@+id/enddatelayout">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="End date:"
-            android:textSize="15sp"
-            android:layout_gravity="center_vertical"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/change_date"
-            android:id="@+id/btnEnd"
-            android:onClick="launchDatePicker" />
-
-    </LinearLayout>-->
-
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

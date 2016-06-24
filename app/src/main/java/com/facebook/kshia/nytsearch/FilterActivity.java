@@ -1,18 +1,13 @@
 package com.facebook.kshia.nytsearch;
 
 
-import android.app.DatePickerDialog;
-import android.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
 import android.widget.Spinner;
 
-import java.util.Calendar;
 
-public class FilterActivity extends AppCompatActivity {//implements DatePickerDialog.OnDateSetListener{
+public class FilterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +23,4 @@ public class FilterActivity extends AppCompatActivity {//implements DatePickerDi
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
     }
-
-    //key: fq value: news_desk:Obits
-
-
-
-
 }

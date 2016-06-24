@@ -31,7 +31,7 @@
             android:text="TextView"
             android:id="@+id/tvTitle"
             android:typeface="serif"
-            android:textSize="10sp"
+            android:textSize="12sp"
             android:maxLines="3"
             android:ellipsize="end"/>
     </LinearLayout>

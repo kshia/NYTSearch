@@ -28,7 +28,6 @@ public class ArticleRecyclerAdapter extends
         // for any view that will be set as you render a row
         public ImageView ivThumbnail;
         public TextView tvTitle;
-        //public DynamicHeightImageView ivThumbnail;
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -41,15 +40,6 @@ public class ArticleRecyclerAdapter extends
             tvTitle = (TextView) itemView.findViewById(R.id.tvTitle);
         }
 
-//        @Override
-//        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-//            // Calculate the image ratio of the loaded bitmap
-//            float ratio = (float) bitmap.getHeight() / (float) bitmap.getWidth();
-//            // Set the ratio for the image
-//            ivThumbnail.setHeightRatio(ratio);
-//            // Load the image into the view
-//            ivThumbnail.setImageBitmap(bitmap);
-//        }
     }
 
     // Store a member variable for the contacts
@@ -100,9 +90,6 @@ public class ArticleRecyclerAdapter extends
         if (!TextUtils.isEmpty(thumbnailUrl)) {
             Picasso.with(ivThumbnail.getContext()).load(thumbnailUrl).into(ivThumbnail);
         }
-//        else {
-//            ivThumbnail.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
-//        }
     }
 
     // Return the total count of items

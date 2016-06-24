@@ -3,8 +3,6 @@ package com.facebook.kshia.nytsearch;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.facebook.kshia.nytsearch.R;
-
 /*
   Source: http://www.littlerobots.nl/blog/Handle-Android-RecyclerView-Clicks/
   USAGE:

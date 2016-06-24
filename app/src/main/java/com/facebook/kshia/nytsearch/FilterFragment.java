@@ -34,28 +34,13 @@ import java.util.Date;
  * create an instance of this fragment.
  */
 public class FilterFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener{
-//    // TODO: Rename parameter arguments, choose names that match
-//    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-//    private static final String ARG_PARAM1 = "param1";
-//    private static final String ARG_PARAM2 = "param2";
-//
-//    // TODO: Rename and change types of parameters
-//    private String mParam1;
-//    private String mParam2;
 
-
-
-    private OnFragmentInteractionListener mListener;
     private Button btnBegin;
-    private Button btnEnd;
-//    String beginDateAPI;
-//    String sortAPI;
-//    String newsdeskAPI;
+    OnFragmentInteractionListener mListener;
     FilterSettings filterSettings;
     Spinner sortSpinner;
     Spinner spinner;
 
-   // private int beginId;
 
     public FilterFragment() {
         // Required empty public constructor
@@ -70,12 +55,8 @@ public class FilterFragment extends DialogFragment implements DatePickerDialog.O
      * @return A new instance of fragment FilterFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static FilterFragment newInstance() { //(String param1, String param2) {
+    public static FilterFragment newInstance() {
         FilterFragment fragment = new FilterFragment();
-        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
-//        fragment.setArguments(args);
         return fragment;
     }
 
@@ -86,8 +67,6 @@ public class FilterFragment extends DialogFragment implements DatePickerDialog.O
 
 
         if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -97,10 +76,6 @@ public class FilterFragment extends DialogFragment implements DatePickerDialog.O
 
         SearchActivity activity = (SearchActivity) getActivity();
         filterSettings = activity.getFilterSettings();
-
-//        beginDateAPI = activity.beginDateAPI;
-//        sortAPI = activity.sortAPI;
-//        newsdeskAPI = activity.news_deskAPI;
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_filter, container, false);
@@ -141,7 +116,6 @@ public class FilterFragment extends DialogFragment implements DatePickerDialog.O
         if (filterSettings.getButton_date() != null) {
             btnBegin.setText(filterSettings.getButton_date());
         }
-//        btnEnd = (Button) view.findViewById(R.id.btnEnd);
 
         getDialog().setTitle("Select Filters");
 
@@ -154,20 +128,8 @@ public class FilterFragment extends DialogFragment implements DatePickerDialog.O
                 DialogFragment newFragment = (DialogFragment) dpFragment;
 
                 newFragment.setTargetFragment(FilterFragment.this, 300);
-                //dpFragment.setFlag(DatePickerFragment.FLAG_BEGIN_DATE);
-                //Log.d("Calendar", "DatePickerId: " + beginId);
                 newFragment.show(getFragmentManager(), "beginPicker");
 
-//                DatePicker datePicker = (DatePicker) getFragmentManager().findFragmentById(R.id.beg);
-//
-//                datePicker.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), new DatePicker.OnDateChangedListener() {
-//
-//                    @Override
-//                    public void onDateChanged(DatePicker datePicker, int year, int month, int dayOfMonth) {
-//                        Log.d("Date", "Year=" + year + " Month=" + (month + 1) + " day=" + dayOfMonth);
-//
-//                    }
-//                });
             }
         });
 
@@ -183,37 +145,12 @@ public class FilterFragment extends DialogFragment implements DatePickerDialog.O
                 dismiss();
             }
         });
-//        btnEnd.setOnClickListener(new View.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                DialogFragment newFragment = new DatePickerFragment();
-//                newFragment.show(getFragmentManager(), "endPicker");
-//            }
-//        });
 
-
-        Calendar c = Calendar.getInstance();
-
-        SimpleDateFormat df = new SimpleDateFormat("MMM dd, yyyy");
-//        String currDate = df.format(c.getTime());
-
-//        btnEnd.setText(currDate);
 
         return view;
     }
 
-//    public void afterDateSet() {
-//        Toast.makeText(getActivity(), "HI", Toast.LENGTH_SHORT).show();
-//    }
-//
-//    // TODO: Rename method, update argument and hook method into UI event
-//    public void onButtonPressed(Uri uri) {
-//        if (mListener != null) {
-//            mListener.onFragmentInteraction(uri);
-//        }
-//    }
+
 
     @Override
     public void onAttach(Context context) {
@@ -239,12 +176,15 @@ public class FilterFragment extends DialogFragment implements DatePickerDialog.O
 //            Toast.makeText(getActivity(), "OMG IT WORKS!", Toast.LENGTH_SHORT).show();
 //        }
 //        else {
-
             final Calendar c = Calendar.getInstance();
             c.set(Calendar.YEAR, year);
             c.set(Calendar.MONTH, monthOfYear);
             c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             Toast.makeText(getActivity(),"YAY!", Toast.LENGTH_SHORT).show();
+
+            filterSettings.setYear(c.get(Calendar.YEAR));
+            filterSettings.setMonth(c.get(Calendar.MONTH));
+            filterSettings.setDay(c.get(Calendar.DAY_OF_MONTH));
 
 
             SimpleDateFormat df = new SimpleDateFormat("MMM dd, yyyy");
@@ -272,7 +212,6 @@ public class FilterFragment extends DialogFragment implements DatePickerDialog.O
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 
@@ -281,15 +220,6 @@ public class FilterFragment extends DialogFragment implements DatePickerDialog.O
     public interface FilterFragmentListener {
         void onFilterFinished();
     }
-
-//    // Call this method to send the data back to the parent fragment
-//    public void sendBackResult() {
-//        // Notice the use of `getTargetFragment` which will be set when the dialog is displayed
-//        FilterFragmentListener listener = (FilterFragmentListener) getActivity();
-//
-//        listener.onFilterFinished(beginDateAPI, sortAPI, newsdeskAPI);
-//        dismiss();
-//    }
 
 
 }
