@@ -172,31 +172,27 @@ public class FilterFragment extends DialogFragment implements DatePickerDialog.O
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
         Log.d("Calendar", "onDateSet in FilterFragment triggered. DatePicker View id: " + view.getId());
-//        if () {
-//            Toast.makeText(getActivity(), "OMG IT WORKS!", Toast.LENGTH_SHORT).show();
-//        }
-//        else {
-            final Calendar c = Calendar.getInstance();
-            c.set(Calendar.YEAR, year);
-            c.set(Calendar.MONTH, monthOfYear);
-            c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            Toast.makeText(getActivity(),"YAY!", Toast.LENGTH_SHORT).show();
 
-            filterSettings.setYear(c.get(Calendar.YEAR));
-            filterSettings.setMonth(c.get(Calendar.MONTH));
-            filterSettings.setDay(c.get(Calendar.DAY_OF_MONTH));
+        final Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.MONTH, monthOfYear);
+        c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+        filterSettings.setYear(c.get(Calendar.YEAR));
+        filterSettings.setMonth(c.get(Calendar.MONTH));
+        filterSettings.setDay(c.get(Calendar.DAY_OF_MONTH));
 
 
-            SimpleDateFormat df = new SimpleDateFormat("MMM dd, yyyy");
-            String newDate = df.format(c.getTime());
-            filterSettings.setButton_date(newDate);
-            btnBegin.setText(filterSettings.getButton_date());
-            Log.d("Filters", "Button Text: " + newDate);
+        SimpleDateFormat df = new SimpleDateFormat("MMM dd, yyyy");
+        String newDate = df.format(c.getTime());
+        filterSettings.setButton_date(newDate);
+        btnBegin.setText(filterSettings.getButton_date());
+        Log.d("Filters", "Button Text: " + newDate);
 
-            SimpleDateFormat apiFormat = new SimpleDateFormat("yyyyMMdd");
-            String beginDateAPI = apiFormat.format(c.getTime());
-            filterSettings.setBegin_date(beginDateAPI);
-            Log.d("Filters", "Setting: " + beginDateAPI);
+        SimpleDateFormat apiFormat = new SimpleDateFormat("yyyyMMdd");
+        String beginDateAPI = apiFormat.format(c.getTime());
+        filterSettings.setBegin_date(beginDateAPI);
+        Log.d("Filters", "Setting: " + beginDateAPI);
     }
 
 
