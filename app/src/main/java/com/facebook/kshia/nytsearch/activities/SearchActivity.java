@@ -4,6 +4,8 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -102,8 +104,12 @@ public class SearchActivity extends AppCompatActivity implements FilterFragment.
         adapter = new ArticleRecyclerAdapter(this, articles);
         rvArticles.setAdapter(adapter);
 
+        int numColumns = 3;     // Default to 3 columns for portrait
         // Set layout manager to position the items
-        layoutManager = new StaggeredGridLayoutManager(3, getResources().getConfiguration().orientation);
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            numColumns = 4;
+        }
+        layoutManager = new StaggeredGridLayoutManager(numColumns, StaggeredGridLayoutManager.VERTICAL);
         layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
         rvArticles.setLayoutManager(layoutManager);
 
@@ -320,7 +326,7 @@ public class SearchActivity extends AppCompatActivity implements FilterFragment.
 
     @Override
     public void onFilterFinished() {
-        Toast.makeText(this, "filterFinished", Toast.LENGTH_SHORT).show();
+
 //        beginDateAPI = beginDate;       //already formatted
 //        sortAPI = sort.toLowerCase();
 //        news_deskAPI = news_desk;
@@ -328,6 +334,7 @@ public class SearchActivity extends AppCompatActivity implements FilterFragment.
 //            news_deskAPI = "";
 //        }L
         if (searchQuery == null || searchQuery.equals("")) {
+            Toast.makeText(this, "Enter a query before filtering", Toast.LENGTH_SHORT).show();
             loadTopStories();
         }
         else {

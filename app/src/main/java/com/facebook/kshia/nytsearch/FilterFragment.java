@@ -175,7 +175,7 @@ public class FilterFragment extends DialogFragment implements DatePickerDialog.O
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "onSaveClicked", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "onSaveClicked", Toast.LENGTH_SHORT).show();
                 FilterFragmentListener listener = (FilterFragmentListener) getActivity();
                 filterSettings.setSort(sortSpinner.getSelectedItem().toString());
                 filterSettings.setNews_desk(spinner.getSelectedItem().toString());

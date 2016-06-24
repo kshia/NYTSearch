@@ -30,6 +30,7 @@
             android:layout_height="wrap_content"
             android:text="TextView"
             android:id="@+id/tvTitle"
+            android:typeface="serif"
             android:textSize="10sp"
             android:maxLines="3"
             android:ellipsize="end"/>
