@@ -310,4 +310,6 @@ public class SearchActivity extends AppCompatActivity implements FilterFragment.
         return super.onOptionsItemSelected(item);
     }
 
+
+
 }
